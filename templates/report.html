@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<title>Schlagdokumentation – Compliance Report</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root{--border:#000;--bg:#fff;--gray:#f3f3f3}
+  *{box-sizing:border-box}
+  html,body{background:var(--bg);color:#000;font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  .wrap{max-width:1100px;margin:24px auto;padding:0 12px}
+  .toolbar{display:flex;gap:8px;justify-content:flex-end;margin-bottom:10px}
+  .btn{border:1px solid #000;background:#fff;padding:6px 10px;cursor:pointer}
+  .band{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:10px}
+  .pill{border:2px solid var(--border);border-radius:6px;padding:8px 10px;text-align:center;font-weight:700;background:var(--bg)}
+  .pill span{font-weight:400}
+  .hdr{border:2px solid var(--border);padding:10px;margin-bottom:12px}
+  .hdr table{width:100%;border-collapse:collapse}
+  .hdr th,.hdr td{border:1px solid var(--border);padding:6px 8px;vertical-align:middle}
+  .hdr th{white-space:nowrap;text-align:left}
+  .block{border:2px solid var(--border);margin-bottom:12px}
+  .block .title{font-weight:700;padding:6px 8px;border-bottom:2px solid var(--border);background:var(--gray)}
+  .block table{width:100%;border-collapse:collapse}
+  .block th,.block td{border:1px solid var(--border);padding:6px 8px;vertical-align:middle}
+  .block th{background:var(--gray);text-align:left}
+  .harvest{border:2px solid var(--border)}
+  .harvest .title{font-weight:700;padding:6px 8px;border-bottom:2px solid var(--border);background:var(--gray)}
+  .harvest .row{display:grid;grid-template-columns:220px 1fr;border-bottom:1px solid var(--border)}
+  .harvest .row:last-child{border-bottom:0}
+  .harvest .label{padding:6px 8px;border-right:1px solid var(--border);background:var(--gray)}
+  .harvest .value{padding:6px 8px}
+  .line{height:32px;border-bottom:1px solid var(--border)}
+  footer{margin-top:8px;font-size:12px;display:flex;justify-content:space-between;align-items:center}
+  .brand{color:#2bb673;font-weight:600}
+  @media print{.toolbar{display:none}.wrap{margin:0;padding:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Buttons -->
+  <div class="toolbar">
+    <button id="langBtn" class="btn" onclick="toggleLang()">EN</button>
+    <button class="btn" onclick="window.print()">PDF</button>
+  </div>
+
+  <!-- Title pills -->
+  <div class="band">
+    <div class="pill" id="t_doc">Schlagdokumentation</div>
+    <div class="pill"><span id="t_crop_lbl">Hauptfrucht</span><br><span id="v_crop">Wintergerste</span></div>
+    <div class="pill"><span id="t_year_lbl">Erntejahr</span><br><span id="v_year">2025</span></div>
+  </div>
+
+  <!-- Header block -->
+  <div class="hdr">
+    <table>
+      <tr>
+        <th id="t_farm_lbl" style="width:110px">Betrieb:</th>
+        <td><b id="t_name_lbl">Name:</b> <span id="v_farm_name">Klostermühle Landwirtschaft</span></td>
+        <td><b id="t_num_lbl">Nummer:</b> <span id="v_farm_no">6</span></td>
+        <th id="t_delnote_lbl" style="width:140px">LieferscheinNr.:</th>
+        <td id="v_delnote">—</td>
+      </tr>
+      <tr>
+        <th id="t_field_lbl">Schlag:</th>
+        <td><b id="t_field_num_lbl">Nummer:</b> <span id="v_field_no">23 - 0</span>
+           &nbsp;&nbsp; <b id="t_field_name_lbl">Bezeichnung:</b> <span id="v_field_name">Waldacker</span></td>
+        <td><b id="t_size_lbl">Größe:</b> <span id="v_size">12,2947 ha</span></td>
+        <th id="t_block_lbl">Feldblock:</th>
+        <td id="v_block">—</td>
+      </tr>
+      <tr>
+        <td colspan="3" id="t_constraints">Bewirtschaftungsauflagen, falls ja: Art/Laufzeit der Auflage</td>
+        <td colspan="2" id="t_cover">Zwischenfrucht vor der aktuellen Hauptfrucht? Falls ja: Art:</td>
+      </tr>
+      <tr>
+        <th id="t_sowing_lbl">Aussaat:</th>
+        <td><b id="t_date_lbl">Datum:</b> <span id="v_sow_date"></span></td>
+        <td><b id="t_variety_lbl">Sorte:</b> <span id="v_variety">KWS Faro, NB</span></td>
+        <th id="t_ack_lbl">Anerkennungsnummer:</th>
+        <td id="v_ack">—</td>
+      </tr>
+      <tr>
+        <th id="t_drill_lbl">Drillsaat:</th><td id="v_drill">Nein</td>
+        <th id="t_mulch_lbl">Mulchsaat:</th>
+        <td colspan="2"><span id="v_mulch">Nein</span> &nbsp;&nbsp; <b id="t_direct_lbl">Direktsaat:</b> <span id="v_direct">Nein</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Plant Protection (empty rows) -->
+  <div class="block">
+    <div class="title" id="t_pp_title">Pflanzenschutzmittel</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:110px" id="t_pp_date">Datum</th>
+          <th id="t_pp_prod">Pflanzenschutzmittel</th>
+          <th style="width:110px" id="t_pp_amt">Menge / ha</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+        <tr><td>&nbsp;{{date}}</td><td>{{product}}</td><td>{{quantity}}</td></tr>
+        {% endfor %}
+    </tbody>
+    </table>
+  </div>
+
+  <!-- Soil -->
+  <div class="block">
+    <div class="title" id="t_soil_title">Bodenuntersuchung</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:200px" id="t_param">Parameter</th>
+          <th style="width:120px" id="t_year_col">Jahr</th>
+          <th id="t_result">Ergebnis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td id="v_param_n">Stickstoff</td><td id="v_soil_year1">2025</td><td id="v_n">25,0 kg</td></tr>
+        <tr><td id="v_param_p">Phosphorpentoxid</td><td id="v_soil_year2">2025</td><td id="v_p">20,99 mg/100g</td></tr>
+        <tr><td id="v_param_k">Kaliumnoxid</td><td id="v_soil_year3">2025</td><td id="v_k">112,19 mg/100g</td></tr>
+        <tr><td id="v_param_mg">Magnesiumoxid</td><td id="v_soil_year4">2025</td><td id="v_mg">10,52 mg/100g</td></tr>
+        <tr><td id="v_param_ph">pH-Wert</td><td id="v_soil_year5">2025</td><td id="v_ph">6,0</td></tr>
+        <tr><td id="v_param_b">Bor</td><td id="v_soil_year6">2025</td><td id="v_b">0,60 mg/1000g</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Harvest -->
+  <div class="harvest" style="margin-bottom:6px">
+    <div class="title" id="t_harvest_title">Ernte</div>
+    <div class="row"><div class="label" id="t_harvest_date">Datum:</div><div class="value" id="v_harvest_date"></div></div>
+    <div class="row"><div class="label" id="t_use">Verwendung als Hauptfruchtertrag</div><div class="value" id="v_use">—</div></div>
+    <div class="row"><div class="label" id="t_total_yield">Ertrag gesamt:</div><div class="value" id="v_total_yield">827,80 dt</div></div>
+    <div class="row"><div class="label" id="t_notes">Bemerkungen:</div><div class="value"><div class="line"></div></div></div>
+  </div>
+
+  <footer>
+    <div class="brand">NEXT Farming Pro</div>
+    <div id="t_generated">Generiert am <span id="today"></span></div>
+  </footer>
+</div>
+
+<script>
+  // helper: today's date in selected locale
+  function todayStr(lang){
+    const loc = lang==='en' ? 'en-GB' : 'de-DE';
+    return new Intl.DateTimeFormat(loc).format(new Date());
+  }
+
+  // UI labels (fully translatable, including former German-only terms)
+  const ui={
+    de:{t_doc:"Schlagdokumentation",t_crop_lbl:"Hauptfrucht",t_year_lbl:"Erntejahr",
+        t_farm_lbl:"Betrieb:",t_name_lbl:"Name:",t_num_lbl:"Nummer:",
+        t_delnote_lbl:"LieferscheinNr.:",t_field_lbl:"Schlag:",
+        t_field_num_lbl:"Nummer:",t_field_name_lbl:"Bezeichnung:",
+        t_size_lbl:"Größe:",t_block_lbl:"Feldblock:",
+        t_constraints:"Bewirtschaftungsauflagen, falls ja: Art/Laufzeit der Auflage",
+        t_cover:"Zwischenfrucht vor der aktuellen Hauptfrucht? Falls ja: Art:",
+        t_sowing_lbl:"Aussaat:",t_date_lbl:"Datum:",t_variety_lbl:"Sorte:",
+        t_pp_title:"Pflanzenschutzmittel",t_pp_date:"Datum",t_pp_prod:"Pflanzenschutzmittel",t_pp_amt:"Menge / ha",
+        t_soil_title:"Bodenuntersuchung",t_param:"Parameter",t_year_col:"Jahr",t_result:"Ergebnis",
+        t_harvest_title:"Ernte",t_harvest_date:"Datum:",t_use:"Verwendung als Hauptfruchtertrag",
+        t_total_yield:"Ertrag gesamt:",t_notes:"Bemerkungen:",t_generated:"Generiert am ",
+        t_ack_lbl:"Anerkennungsnummer:",t_drill_lbl:"Drillsaat:",t_mulch_lbl:"Mulchsaat:",t_direct_lbl:"Direktsaat:"},
+    en:{t_doc:"Field Documentation",t_crop_lbl:"Main Crop",t_year_lbl:"Harvest Year",
+        t_farm_lbl:"Farm:",t_name_lbl:"Name:",t_num_lbl:"Number:",
+        t_delnote_lbl:"Delivery note No.:",t_field_lbl:"Field:",
+        t_field_num_lbl:"Number:",t_field_name_lbl:"Designation:",
+        t_size_lbl:"Size:",t_block_lbl:"Field block:",
+        t_constraints:"Management constraints, if any: Type/Duration",
+        t_cover:"Catch crop before current main crop? If yes: Type:",
+        t_sowing_lbl:"Sowing:",t_date_lbl:"Date:",t_variety_lbl:"Variety:",
+        t_pp_title:"Plant Protection",t_pp_date:"Date",t_pp_prod:"Product",t_pp_amt:"Amount / ha",
+        t_soil_title:"Soil Analysis",t_param:"Parameter",t_year_col:"Year",t_result:"Result",
+        t_harvest_title:"Harvest",t_harvest_date:"Date:",t_use:"Use as main crop yield",
+        t_total_yield:"Total yield:",t_notes:"Notes:",t_generated:"Generated on ",
+        t_ack_lbl:"Certification number:",t_drill_lbl:"Drill seeding:",t_mulch_lbl:"Mulch seeding:",t_direct_lbl:"Direct seeding:"}
+  };
+
+  // Data values per language
+  function data(lang){
+    if(lang==='en'){
+      return {
+        v_crop:"Winter barley",
+        v_year:"2025",
+        v_farm_name:"Klostermuehle Farm",
+        v_farm_no:"6",
+        v_delnote:"—",
+        v_field_no:"23 - 0",
+        v_field_name:"Forest Field (Waldacker)",
+        v_size:"12.2947 ha",
+        v_block:"—",
+        v_sow_date: todayStr('en'),
+        v_variety:"KWS Faro, NB",
+        v_ack:"—",
+        v_drill:"No", v_mulch:"No", v_direct:"No",
+        v_param_n:"Nitrogen", v_param_p:"Phosphorus pentoxide", v_param_k:"Potassium oxide",
+        v_param_mg:"Magnesium oxide", v_param_ph:"pH", v_param_b:"Boron",
+        v_n:"25.0 kg", v_p:"20.99 mg/100g", v_k:"112.19 mg/100g", v_mg:"10.52 mg/100g", v_ph:"6.0", v_b:"0.60 mg/1000g",
+        v_harvest_date: todayStr('en'), v_use:"—", v_total_yield:"827.80 dt"
+      };
+    }
+    return {
+      v_crop:"Wintergerste",
+      v_year:"2025",
+      v_farm_name:"Klostermühle Landwirtschaft",
+      v_farm_no:"6",
+      v_delnote:"—",
+      v_field_no:"23 - 0",
+      v_field_name:"Waldacker",
+      v_size:"12,2947 ha",
+      v_block:"—",
+      v_sow_date: todayStr('de'),
+      v_variety:"KWS Faro, NB",
+      v_ack:"—",
+      v_drill:"Nein", v_mulch:"Nein", v_direct:"Nein",
+      v_param_n:"Stickstoff", v_param_p:"Phosphorpentoxid", v_param_k:"Kaliumnoxid",
+      v_param_mg:"Magnesiumoxid", v_param_ph:"pH-Wert", v_param_b:"Bor",
+      v_n:"25,0 kg", v_p:"20,99 mg/100g", v_k:"112,19 mg/100g", v_mg:"10,52 mg/100g", v_ph:"6,0", v_b:"0,60 mg/1000g",
+      v_harvest_date: todayStr('de'), v_use:"—", v_total_yield:"827,80 dt"
+    };
+  }
+
+  // render
+  function applyLang(lang){
+    const labels=ui[lang];
+    for(const k in labels){
+      const el=document.getElementById(k);
+      if(!el) continue;
+      if(k==='t_generated'){ el.childNodes[0].nodeValue=labels[k]; }
+      else { el.textContent=labels[k]; }
+    }
+    const vals=data(lang);
+    for(const k in vals){
+      const el=document.getElementById(k);
+      if(el) el.textContent=vals[k];
+    }
+    document.getElementById('today').textContent=todayStr(lang);
+    document.getElementById('langBtn').textContent=(lang==='de'?'EN':'DE');
+    document.documentElement.lang=lang;
+  }
+
+  let currentLang='de';
+  function toggleLang(){ currentLang = currentLang==='de' ? 'en' : 'de'; applyLang(currentLang); }
+
+  // init with today's date everywhere
+  applyLang('de');
+</script>
+</body>
+</html>

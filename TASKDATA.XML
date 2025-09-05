@@ -1,0 +1,39 @@
+
+<ISO11783_TaskData VersionMajor="4" VersionMinor="2" ManagementSoftwareManufacturer="Plantivo GmbH" ManagementSoftwareVersion="1.0.0.0" TaskControllerManufacturer="" TaskControllerVersion="" DataTransferOrigin="1">
+  <CPC A="CPC1" B="Pflanzenschutz" />
+  <CTR A="CTR1" B="Hackathon1" D="Birkenhof 1" F="55618" G="Simmertal" H="Rheinland-Pfalz" I="Deutschland" K="01751234567" />
+  <FRM A="FRM1" B="Hackathon1" C="Birkenhof 1" E="55618" F="Simmertal" G="Rheinland-Pfalz" H="Deutschland" />
+  <PDT A="PDT1" B="Unbekannt" F="1" />
+  <PDT A="PDT2" B="Teppeki" F="1" />
+  <PDT A="PDT3" B="Gemisch: Teppeki" F="1" />
+  <PFD A="PFD1" C="ex_compliant" D="0" F="FRM1">
+    <PLN A="1">
+      <LSG A="1">
+        <PNT A="2" C="49.546946492" D="7.874200586" />
+        <PNT A="2" C="49.546518341" D="7.874547305" />
+        <PNT A="2" C="49.546644126" D="7.874882839" />
+        <PNT A="2" C="49.547057762" D="7.874588314" />
+        <PNT A="2" C="49.546946492" D="7.874200586" />
+        <PNT A="2" C="49.546946492" D="7.874200586" />
+      </LSG>
+    </PLN>
+    <PNT A="3" C="49.546946492" D="7.874200586" />
+  </PFD>
+  <VPN A="VPN1" B="0" C="0.0001" D="2" E="l/ha" />
+  <TSK A="TSK1" B="Pflanzenschutz/ex_compliant/" C="CTR1" D="FRM1" E="PFD1" G="1" H="1" I="3" J="2">
+    <OTP A="CPC1" />
+    <TZN A="1" B="Default">
+      <PDV A="0001" B="10000" C="PDT3" E="VPN1" />
+    </TZN>
+    <TZN A="2" B="OutOfField">
+      <PDV A="0001" B="0" C="PDT3" E="VPN1" />
+    </TZN>
+    <TZN A="3" B="PositionLost">
+      <PDV A="0001" B="10000" C="PDT3" E="VPN1" />
+    </TZN>
+    <TIM A="2025-09-03T00:00:00" B="2025-09-03T00:00:00" C="0" D="1" />
+    <PAN A="PDT3" />
+    <DLT A="DFFF" B="31" />
+    <CAN />
+  </TSK>
+</ISO11783_TaskData>
